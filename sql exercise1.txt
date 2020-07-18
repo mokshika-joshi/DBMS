@@ -1,0 +1,160 @@
+SQL EXERCISE - 1
+
+
+1. Create the table SEMP with the following structure:-
+
+	EMPNO CHAR(4)
+	EMPNAME CHAR(20)
+	BASIC FLOAT(9,2)
+	DEPTNO CHAR(2)
+	DEPTHEAD CHAR(4)
+
+Ans. CREATE table SEMP
+     (EMPNO CHAR(4),EMPNAME CHAR(20),BASIC FLOAT(9,2),DEPTNO CHAR(2),DEPTHEAD CHAR(4));
+
+
+2. Create the table SDEPT with the following structure:-
+
+	DEPTNO CHAR(2)
+	DEPTNAME CHAR(15)
+
+Ans. CREATE table SDEPT(DEPTNO CHAR(2), DEPTNAME CHAR(15) );
+
+
+3. Insert into the SDEPT table the following values:-
+
+	10, Development
+	20, Training
+
+Ans. INSERT into SDEPT(DEPTNO,DEPTNAME)
+     values('10','Development'),('20','Training');
+
+
+4. Insert into the SEMP table the following values:-
+
+	0001, SUNIL, 6000, 10
+	0002, HIREN, 8000, 20
+	0003, ALI, 4000, 10, 0001
+	0004, GEORGE, 6000, 0002
+
+Ans. INSERT into SEMP 
+     (EMPNO,EMPNAME,BASIC,DEPTNO)
+     values ('0001','SUNIL',6000,'10',NULL),
+     ('0002','HIREN',8000,'20',NULL),
+     ('0003','ALI',4000,'10','0001'),
+     ('0004','GEORGE',6000,NULL,'0002');
+
+5. Create S, P, J, SPJ tables as specified below and insert a few rows in each table:-
+
+SUPPLIER
+(S#, Sname, Status, City)- S
+PARTS	
+(P#, Pname, Color, Weight, City)- P
+PROJECTS
+(J#, Jname, City)- J
+SUPPLIER-PARTS-PROJECT
+(S#, P#, J#, Qty)- SPJ
+Sample data for S# column:- ‘S1’, ‘S2’, ‘S3’, etc.
+Sample data for P# column:- ‘P1’, ‘P2’, ‘P3’, etc.
+Sample data for J# column:- ‘J1’, ‘J2’, ‘J3’, etc.
+Sample data for Status column:- 10, 20, 30, etc.
+
+
+
+Ans.	CREATE TABLE S 
+	(S# VARCHAR(5),
+	Sname VARCHAR(20),
+  	Status INT(4),
+	City VARCHAR(15));
+
+	CREATE TABLE P
+	(P# VARCHAR(6),
+	Pname VARCHAR(20),
+	Color VARCHAR(6),
+	Weight INT(4),
+	City VARCHAR(15));
+
+	CREATE TABLE J
+	(J# VARCHAR(4),
+	Jname VARCHAR(10),
+	City VARCHAR(15));
+
+	CREATE TABLE SPJ
+	(S# VARCHAR(4),
+	P# VARCHAR(4),
+	J# VARCHAR(4),
+	STATUS INT(4));	
+
+	INSERT INTO S (`S#`, Sname, Status, City) VALUES ('S1', 'Smith', '10', 'Paris');
+	INSERT INTO S (`S#`, Sname, Status, City) VALUES ('S2', 'John', '20', 'London');
+	INSERT INTO S (`S#`, Sname, Status, City) VALUES ('S3', 'Adam', '30', 'Athens');
+	INSERT INTO S (`S#`, Sname, Status, City) VALUES ('S4', 'Joe', '40', 'Athens');
+
+
+	INSERT INTO P (`P#`, Pname, Color, Weight, City) VALUES ('P1', 'Screw', 'red', '10', 'Paris');
+	INSERT INTO P (`P#`, Pname, Color, Weight, City) VALUES ('P2', 'Nut', 'blue', '13', 'London');
+	INSERT INTO P (`P#`, Pname, Color, Weight, City) VALUES ('P3', 'Bolt', 'black', '14', 'Athens');
+	INSERT INTO P (`P#`, Pname, Color, Weight, City) VALUES ('P4', 'Gear', 'black', '15', 'Paris');
+
+	INSERT INTO J (`J#`, Jname, City) VALUES ('J1', 'Car', 'Paris');
+	INSERT INTO J (`J#`, Jname, City) VALUES ('J2', 'Bike', 'London');
+	INSERT INTO J (`J#`, Jname, City) VALUES ('J3', 'Truck', 'Athens');	
+	INSERT INTO J (`J#`, Jname, City) VALUES ('J4', 'Tractor', 'London');
+
+
+Write the SELECT queries to do the following:-
+
+6. Display all the data from the S table.
+
+Ans. SELECT * FROM S;
+
+
+7. Display only the S# and SNAME fields from the S table.
+
+Ans. SELECT S#,SNAME FROM S;
+
+
+8. Display the PNAME and COLOR from the P table for the CITY=”London”.
+
+Ans. SELECT PNAME, COLOR FROM P WHERE CITY="London";
+
+
+9. Display all the Suppliers from London.
+
+Ans. SELECT Sname FROM S WHERE CITY="London";
+
+
+10. Display all the Suppliers from Paris or Athens.
+
+Ans. SELECT * FROM S WHERE CITY="Paris" OR CITY="Athens";
+
+
+11. Display all the Projects in Athens.
+
+Ans. Select * FROM J WHERE CITY="Athens";
+
+12. Display all the Partnames with the weight between 12 and 14 (inclusive of both).
+
+Ans. SELECT Pname FROM P WHERE Weight>=12 AND WEIGHT<=14;
+
+
+13. Display all the Suppliers with a Status greater than or equal to 20.
+
+Ans. SELECT Sname FROM S WHERE Status>=20;
+
+
+14. Display all the Suppliers except the Suppliers from London.
+
+Ans. SELECT Sname FROM S WHERE City!='London';
+
+
+15. Display only the Cities from where the Suppliers come from.
+
+Ans. SELECT City From S;
+
+
+16. Assuming that the Part Weight is in GRAMS, display the same in
+MILLIGRAMS and KILOGRAMS. 
+
+Ans. SELECT Weight*1000 AS milligram FROM P;
+     SELECT Weight/1000 AS kilogram FROM P;
