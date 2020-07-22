@@ -1,0 +1,85 @@
+SQL Exercise 4
+
+1. Display the minimum Status in the Supplier table.
+
+Ans. 	SELECT min(status) 
+	FROM supplier;
+
+
+2. Display the maximum Weight in the Parts table.
+
+Ans. 	SELECT max(weight) 
+	FROM parts; 
+
+
+3. Display the average Weight of the Parts.
+
+Ans. 	SELECT avg(ifnull(weight,0) 
+	FROM parts;
+
+
+4. Display the total Quantity sold for part ‘P1’.
+
+Ans. 	SELECT sum(quantity),`p#` 
+	FROM spj 
+	WHERE `p#`='P1';
+
+
+5. Display the total Quantity sold for each part.
+
+Ans. 	SELECT sum(quantity),`p#` 
+	FROM spj GROUP BY `p#`;
+
+
+6. Display the average Quantity sold for each part.
+
+Ans. 	SELECT avg(quantity),`p#` 
+	FROM spj 
+	GROUP BY `p#`;
+
+
+7. Display the maximum Quantity sold for each part, provided the maximum Quantity
+is greater than 800.
+
+Ans. 	SELECT quantity,`p#` 
+	FROM spj 
+	WHERE quantity=(select max(quantity) 
+	FROM spj GROUP BY `p#`) AND quantity>800 ;
+
+
+8. Display the Status and the count of Suppliers with that Status.
+
+Ans. 	SELECT status,COUNT(status) 
+	FROM supplier GROUP BY status;
+
+
+9. Display the count of Projects going on in different cities.
+
+Ans. 	SELECT COUNT(`J#`),City 
+	FROM projects GROUP BY City;
+
+
+10. What is the difference between COUNT(Status) and COUNT(*) ?
+
+Ans. 	SELECT abs(COUNT(Status)-COUNT(*)) 
+	FROM supplier;
+
+
+11. Display the Status and the Count of Suppliers with that Status in the following format
+as shown below:-
+
+Status Count
+Ten 1
+Twenty 2
+Thirty 3
+
+Ans. 	SELECT case 
+	WHEN status=10 THEN 'Ten'
+	WHEN status=20 THEN 'Twenty'
+	WHEN status=30 THEN 'Thirty'
+	WHEN status=40 THEN 'Forty'
+	WHEN status=50 THEN 'Fifty'
+	WHEN status=30 THEN 'Seventy'
+        else 'null'
+	END 'status',COUNT(status)'total'
+	FROM supplier GROUP BY status;
